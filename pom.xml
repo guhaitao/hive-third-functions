@@ -6,7 +6,7 @@
 
     <groupId>com.github.aaronshan</groupId>
     <artifactId>hive-third-functions</artifactId>
-    <version>2.2.1</version>
+    <version>2.2.2</version>
 
     <name>hive-third-functions</name>
     <url>https://github.com/aaronshan/hive-third-functions</url>
@@ -27,15 +27,15 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.build.targetJdk>1.6</project.build.targetJdk>
+        <project.build.targetJdk>1.8</project.build.targetJdk>
         <project.report.outputEncoding>UTF-8</project.report.outputEncoding>
         <project.report.inputEncoding>UTF-8</project.report.inputEncoding>
 
-        <hive.version>0.11.0</hive.version>
+        <hive.version>3.1.2</hive.version>
         <joda.time.version>2.7</joda.time.version>
-        <hadoop.version>2.2.0</hadoop.version>
-        <pinyin4j.version>2.5.0</pinyin4j.version>
-        <guava.version>18.0</guava.version>
+        <hadoop.version>3.1.4</hadoop.version>
+        <pinyin4j.version>2.5.1</pinyin4j.version>
+        <guava.version>27.0-jre</guava.version>
         <commons-codec.version>1.10</commons-codec.version>
         <dep.airlift.version>0.131</dep.airlift.version>
         <dep.jackson.version>2.9.8</dep.jackson.version>
@@ -46,6 +46,12 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.apache.hive</groupId>
+                <artifactId>hive-exec</artifactId>
+                <version>${hive.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.apache.hive</groupId>
                 <artifactId>hive-jdbc</artifactId>
@@ -146,6 +152,12 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-exec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.hive</groupId>
             <artifactId>hive-jdbc</artifactId>
@@ -343,5 +355,5 @@
             </distributionManagement>
         </profile>
     </profiles>
-    
+
 </project>

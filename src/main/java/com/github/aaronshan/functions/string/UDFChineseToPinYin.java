@@ -10,9 +10,6 @@ import org.apache.hadoop.hive.ql.exec.Description;
 import org.apache.hadoop.hive.ql.exec.UDF;
 import org.apache.hadoop.io.Text;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * Author: ruifengshan
  * Date: 23/03/2015
@@ -51,7 +48,7 @@ public class UDFChineseToPinYin extends UDF {
 
         String result = null;
         try {
-            result = PinyinHelper.toHanyuPinyinString(name, pyFormat, "");
+            result = PinyinHelper.toHanYuPinyinString(name, pyFormat, "", true);
         } catch (BadHanyuPinyinOutputFormatCombination e) {
             return null;
         }
