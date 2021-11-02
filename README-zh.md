@@ -64,6 +64,7 @@ mvn clean package -DskipTests
 |md5(string) -> string | md5 哈希|
 |sha256(string) -> string |sha256 哈希|
 |full2half(string) -> string |将全角转换成半角|
+|filter_illegal_char(string) -> string |过滤不可见非法字符|
 
 ### 2. 数组函数
 
@@ -260,7 +261,9 @@ create temporary function regexp_extract as 'com.github.aaronshan.functions.rege
 create temporary function regexp_extract_all as 'com.github.aaronshan.functions.regexp.UDFRe2JRegexpExtractAll';
 create temporary function regexp_like as 'com.github.aaronshan.functions.regexp.UDFRe2JRegexpLike';
 create temporary function regexp_replace as 'com.github.aaronshan.functions.regexp.UDFRe2JRegexpReplace';
-create temporary function regexp_split as 'com.github.aaronshan.functions.regexp.UDFRe2JRegexpSplit';
+create temporary function regexp_split as 'com.github.aaronshan.functions.regexp.UDFRe2JRegexpSplit';    
+create temporary function full2half as 'com.github.aaronshan.functions.string.UDFFull2Half';
+create temporary function filter_illegal_char as 'com.github.aaronshan.functions.string.UDFFilterIllegalChar';
 ```
 
 你可以在hive的命令杭中使用下面的语句来查看函数的细节.

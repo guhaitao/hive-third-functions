@@ -12,7 +12,7 @@ import org.apache.hadoop.hive.ql.exec.UDF;
  */
 @Description(
         name = "full2half",
-        value = "_FUNC_(full_string) - this is a 全角转化半角 util,若为空，则返回空字符串",
+        value = "_FUNC_(full_string) - Convert full-width to half-width, or NULL if the argument was NULL.",
         extended = "Example:\n > select _FUNC_(full_string) from src;"
 )
 public class UDFFull2Half extends UDF {

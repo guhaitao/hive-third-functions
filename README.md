@@ -71,6 +71,7 @@ Now, I had already release `hive-third-functions` to maven repositories. To add 
 |split_to_map(string, entryDelimiter, keyValueDelimiter) -> map&lt;varchar, varchar> | Splits string by entryDelimiter and keyValueDelimiter and returns a map. entryDelimiter splits string into key-value pairs. keyValueDelimiter splits each pair into key and value.|
 |split_to_multimap(string, entryDelimiter, keyValueDelimiter) -> map(varchar, array(varchar)) | Splits string by entryDelimiter and keyValueDelimiter and returns a map containing an array of values for each unique key. entryDelimiter splits string into key-value pairs. keyValueDelimiter splits each pair into key and value. The values for each key will be in the same order as they appeared in string.|
 |full2half(string) -> string | Convert full-width to half-width |
+|filter_illegal_char(string) -> string |  Filter illegal characters |
 
 [Normalize Form Description](#jump)
 
@@ -287,7 +288,9 @@ create temporary function regexp_extract as 'com.github.aaronshan.functions.rege
 create temporary function regexp_extract_all as 'com.github.aaronshan.functions.regexp.UDFRe2JRegexpExtractAll';
 create temporary function regexp_like as 'com.github.aaronshan.functions.regexp.UDFRe2JRegexpLike';
 create temporary function regexp_replace as 'com.github.aaronshan.functions.regexp.UDFRe2JRegexpReplace';
-create temporary function regexp_split as 'com.github.aaronshan.functions.regexp.UDFRe2JRegexpSplit';
+create temporary function regexp_split as 'com.github.aaronshan.functions.regexp.UDFRe2JRegexpSplit'; 
+create temporary function full2half as 'com.github.aaronshan.functions.string.UDFFull2Half';
+create temporary function filter_illegal_char as 'com.github.aaronshan.functions.string.UDFFilterIllegalChar';
 ```
 
 You can use these statements on hive cli env get detail of function.
