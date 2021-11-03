@@ -5,6 +5,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -63,6 +68,36 @@ public class CardUtils {
         return null;
     }
 
+    public static int getIdCardAge(String card, String ds) throws ParseException {
+        if (isValidIdCard(card)) {
+            int cardLength = card.length();
+            String birthday = card.substring(6, 14);
+            if (cardLength == 15) {
+                birthday = "19" + card.substring(6, 12);
+            }
+            SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+            Calendar dsCal = Calendar.getInstance();
+            Date dsDate = df.parse(ds);
+            dsCal.setTime(dsDate);
+
+            Date birth = df.parse(birthday);
+            Calendar born = Calendar.getInstance();
+            born.setTime(birth);
+
+            if(born.after(dsCal)){
+                return -2;
+            }
+
+            int age = dsCal.get(Calendar.YEAR) - born.get(Calendar.YEAR);
+            if(dsCal.get(Calendar.DAY_OF_YEAR) < born.get(Calendar.DAY_OF_YEAR)) {
+                age -= 1;
+            }
+            return age;
+
+        }
+        return -2;
+    }
+
     public static String getIdCardBirthday(String card) {
         if (isValidIdCard(card)) {
             int cardLength = card.length();
@@ -81,9 +116,9 @@ public class CardUtils {
             int cardLength = card.length();
             int genderValue;
             if (cardLength == 15) {
-                genderValue = card.charAt(15) - 48;
+                genderValue = card.charAt(14) - 48;
             } else {
-                genderValue = card.charAt(17) - 48;
+                genderValue = card.charAt(16) - 48;
             }
 
             if (genderValue % 2 == 0) {
@@ -113,7 +148,7 @@ public class CardUtils {
                     return false;
                 }
                 char validateCode = getValidateCode(card17);
-                if (validateCode == card.charAt(17)) {
+                if (validateCode == card.charAt(17) && getCardValue(card) != null) {
                     return true;
                 }
             } else if (cardLength == 15) {
